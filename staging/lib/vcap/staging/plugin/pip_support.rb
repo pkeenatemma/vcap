@@ -12,6 +12,7 @@ module PipSupport
   end
 
   def install_requirements(packages)
+    ENV['PATH'] = "#{ENV['PATH']}:/usr/bin"
     packages.each do |package|
         system "pip install --user #{package} >> logs/startup.log 2>&1"
     end
