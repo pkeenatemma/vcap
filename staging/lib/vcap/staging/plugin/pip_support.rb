@@ -12,11 +12,10 @@ module PipSupport
   end
 
   def install_requirements(packages)
-    ENV['PATH'] = "#{ENV['PATH']}:/usr/bin"
     packages.each do |package|
-        system "pip install --user #{package} >> logs/startup.log 2>&1"
+        system "PATH=$PATH:/usr/bin pip install --user #{package} >> logs/startup.log 2>&1"
     end
-    system "pip install --user -r #{REQUIREMENTS_FILE} >> ../logs/startup.log 2>&1"
+    system "PATH=$PATH:/usr/bin pip install --user -r #{REQUIREMENTS_FILE} >> ../logs/startup.log 2>&1"
   end
 
   def setup_python_env
