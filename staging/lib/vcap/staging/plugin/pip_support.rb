@@ -19,6 +19,8 @@ module PipSupport
     cmds = [
             'DIR="$( cd "$( dirname "$0" )" && pwd )"',
             "export PYTHONUSERBASE=$DIR/python"
+            "export PATH=$PATH:/usr/bin"
+            "echo $PATH"
            ]
     packages.each { |package|
       cmds << "pip install --user #{package} >> logs/startup.log 2>&1"
