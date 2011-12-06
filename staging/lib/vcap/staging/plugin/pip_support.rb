@@ -12,6 +12,7 @@ module PipSupport
   end
 
   def install_requirements(packages)
+    raise "Cannot install requirements"
     packages.each do |package|
         system "PATH=$PATH:/usr/bin pip install --user #{package} >> logs/startup.log 2>&1"
     end
