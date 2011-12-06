@@ -14,14 +14,14 @@ class WsgiPlugin < StagingPlugin
       create_startup_script
       create_stop_script
       create_gunicorn_config
+      if uses_pip?
+        install_requirements(REQUIREMENTS)
+      end
     end
   end
 
   def start_command
     cmds = []
-    if uses_pip?
-      cmds << install_requirements
-    end
     cmds << "../python/bin/gunicorn -c ../gunicorn.config wsgi:application"
     cmds.join("\n")
   end
@@ -30,7 +30,7 @@ class WsgiPlugin < StagingPlugin
   def startup_script
     vars = environment_hash
     generate_startup_script(vars) do
-      setup_python_env(REQUIREMENTS)
+      setup_python_env
     end
   end
 
